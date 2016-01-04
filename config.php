@@ -18,9 +18,9 @@ $i = 0;
 * 
 * @see more details at http://rockmongo.com/wiki/configuration?lang=en_us
 */
-$MONGO["servers"][$i]["mongo_name"] = $_ENV['MONGO_NAME'];//mongo server name
+$MONGO["servers"][$i]["mongo_name"] = getenv('MONGO_NAME');//mongo server name
 //$MONGO["servers"][$i]["mongo_sock"] = "/var/run/mongo.sock";//mongo socket path (instead of host and port)
-$MONGO["servers"][$i]["mongo_host"] = $_ENV['MONGO_PORT_27017_TCP_ADDR'];//mongo host
+$MONGO["servers"][$i]["mongo_host"] = getenv('MONGO_PORT_27017_TCP_ADDR');//mongo host
 $MONGO["servers"][$i]["mongo_port"] = "27017";//mongo port
 $MONGO["servers"][$i]["mongo_timeout"] = 0;//mongo connection timeout
 //$MONGO["servers"][$i]["mongo_db"] = "MONGO_DATABASE";//default mongo db to connect, works only if mongo_auth=false
@@ -31,9 +31,10 @@ $MONGO["servers"][$i]["mongo_auth"] = false;//enable mongo authentication?
 $ADMIN_USER='admin';
 $ADMIN_PASS='admin';
 
-if(!empty($_ENV['ADMIN_USER'])){
-    $ADMIN_USER=$_ENV['ADMIN_USER'];
-    $ADMIN_PASS=$_ENV['ADMIN_PASS'];
+$ENV_ADMIN_UER=getenv('ADMIN_USER');
+if(!empty($ENV_ADMIN_UER)){
+    $ADMIN_USER=$ENV_ADMIN_UER;
+    $ADMIN_PASS=getenv('ADMIN_PASS');
 }
 
 $MONGO["servers"][$i]["control_auth"] = true;//enable control users, works only if mongo_auth=false
