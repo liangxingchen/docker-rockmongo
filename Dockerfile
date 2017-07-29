@@ -5,7 +5,7 @@ RUN apk upgrade --update && \
     ln -s /usr/bin/php5 /usr/bin/php && \
     pear update-channels && \
     php /usr/share/pear/peclcmd.php install -f mongo && \
-    echo "extension=mongo.so" >> /etc/php/php.ini && \
+    echo "extension=mongo.so" >> /etc/php5/php.ini && \
     apk del --purge php5-dev php5-pear php5-openssl openssl-dev autoconf g++ make ca-certificates
 ADD . /rockmongo
 WORKDIR /rockmongo
