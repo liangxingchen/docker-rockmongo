@@ -1,11 +1,12 @@
 FROM alpine:3.6
 MAINTAINER Liang Xingchen <liang@maichong.it>
 RUN apk upgrade --update && \
-    apk add php5-cli php5-dev php5-pear autoconf openssl-dev g++ make && \
+    apk add php5-cli php5-dev php5-pear php5-openssl ca-certificates autoconf openssl-dev g++ make && \
+    ln -s /usr/bin/php5 /usr/bin/php && \
     pear update-channels && \
     php /usr/share/pear/peclcmd.php install -f mongo && \
     echo "extension=mongo.so" >> /etc/php/php.ini && \
-    apk del --purge php5-dev php5-pear autoconf openssl-dev g++ make
+    apk del --purge php5-dev php5-pear php5-openssl openssl-dev autoconf g++ make ca-certificates
 ADD . /rockmongo
 WORKDIR /rockmongo
 EXPOSE 80
