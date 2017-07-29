@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:3.6
 MAINTAINER Liang Xingchen <liang@maichong.it>
 RUN apk upgrade --update && \
     apk add php-cli php-dev php-pear autoconf openssl-dev g++ make && \
@@ -9,7 +9,7 @@ RUN apk upgrade --update && \
 ADD . /rockmongo
 WORKDIR /rockmongo
 EXPOSE 80
-CMD ["php","-S","0.0.0.0:80"]
+CMD ["php","-d","upload_max_filesize=1024M","-d","post_max_size=1024M","-S","0.0.0.0:80"]
 
 # USEAGE
 # docker run -it --rm -p 8080:80 -v /path/to/config.php:/rockmongo/config.php maichong/rockmongo

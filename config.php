@@ -13,6 +13,15 @@ $MONGO["features"]["plugins"] = "on";//plugins
 
 $i = 0;
 
+$MONGO_HOST=getenv('MONGO_HOST');
+if(empty($MONGO_HOST)){
+    $MONGO_HOST=getenv('MONGO_PORT_27017_TCP_ADDR');
+}
+$MONGO_NAME=getenv('MONGO_NAME');
+if(empty($MONGO_NAME)){
+    $MONGO_NAME=$MONGO_HOST;
+}
+
 /**
 * Configuration of MongoDB servers
 * 
